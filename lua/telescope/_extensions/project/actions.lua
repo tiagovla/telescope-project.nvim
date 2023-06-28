@@ -120,6 +120,21 @@ M.find_project_files = function(prompt_bufnr, hidden_files)
                         _utils.change_project_dir(project_path)
                     end,
                 })
+                actions.select_horizontal:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_vertical:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_tab:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
                 return true
             end,
         })
@@ -149,6 +164,21 @@ M.browse_project_files = function(prompt_bufnr)
                         _utils.change_project_dir(project_path)
                     end,
                 })
+                actions.select_horizontal:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_vertical:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_tab:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
                 return true
             end,
         })
@@ -169,6 +199,21 @@ M.search_in_project_files = function(prompt_bufnr)
                         _utils.change_project_dir(project_path)
                     end,
                 })
+                actions.select_horizontal:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_vertical:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_tab:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
                 return true
             end,
         })
@@ -185,6 +230,21 @@ M.recent_project_files = function(prompt_bufnr)
             cwd = project_path,
             attach_mappings = function()
                 actions.select_default:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_horizontal:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_vertical:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                actions.select_tab:enhance({
                     post = function()
                         _utils.change_project_dir(project_path)
                     end,
