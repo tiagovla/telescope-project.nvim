@@ -110,12 +110,20 @@ end
 M.find_project_files = function(prompt_bufnr, hidden_files)
     local project_path = M.get_selected_path(prompt_bufnr)
     actions._close(prompt_bufnr, true)
-    local cd_successful = _utils.change_project_dir(project_path)
-    if cd_successful then
-        vim.schedule(function()
-            builtin.find_files({ cwd = project_path, hidden = hidden_files })
-        end)
-    end
+    vim.schedule(function()
+        builtin.find_files({
+            cwd = project_path,
+            hidden = hidden_files,
+            attach_mappings = function()
+                actions.select_default:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                return true
+            end,
+        })
+    end)
 end
 
 -- Browse through files within the selected project using
@@ -132,12 +140,19 @@ M.browse_project_files = function(prompt_bufnr)
     end
     local project_path = M.get_selected_path(prompt_bufnr)
     actions._close(prompt_bufnr, true)
-    local cd_successful = _utils.change_project_dir(project_path)
-    if cd_successful then
-        vim.schedule(function()
-            file_browser.exports.file_browser({ cwd = project_path })
-        end)
-    end
+    vim.schedule(function()
+        file_browser.exports.file_browser({
+            cwd = project_path,
+            attach_mappings = function()
+                actions.select_default:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                return true
+            end,
+        })
+    end)
 end
 
 -- Search within files in the selected project using
@@ -145,12 +160,19 @@ end
 M.search_in_project_files = function(prompt_bufnr)
     local project_path = M.get_selected_path(prompt_bufnr)
     actions._close(prompt_bufnr, true)
-    local cd_successful = _utils.change_project_dir(project_path)
-    if cd_successful then
-        vim.schedule(function()
-            builtin.live_grep({ cwd = project_path })
-        end)
-    end
+    vim.schedule(function()
+        builtin.live_grep({
+            cwd = project_path,
+            attach_mappings = function()
+                actions.select_default:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                return true
+            end,
+        })
+    end)
 end
 
 -- Search the recently used files within the selected project
@@ -158,12 +180,19 @@ end
 M.recent_project_files = function(prompt_bufnr)
     local project_path = M.get_selected_path(prompt_bufnr)
     actions._close(prompt_bufnr, true)
-    local cd_successful = _utils.change_project_dir(project_path)
-    if cd_successful then
-        vim.schedule(function()
-            builtin.oldfiles({ cwd_only = true })
-        end)
-    end
+    vim.schedule(function()
+        builtin.oldfiles({
+            cwd = project_path,
+            attach_mappings = function()
+                actions.select_default:enhance({
+                    post = function()
+                        _utils.change_project_dir(project_path)
+                    end,
+                })
+                return true
+            end,
+        })
+    end)
 end
 
 -- Change working directory to the selected project and close the picker.
